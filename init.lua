@@ -1,3 +1,3 @@
-require("config.lazy")
-require("config.set")
-require("config.opt")
+require("core.lazy")
+require("core.settings")
+require("core.options")
