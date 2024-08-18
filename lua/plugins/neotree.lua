@@ -7,7 +7,12 @@ return {
 		"MunifTanjim/nui.nvim",
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
-	keys = {
-		{ "<leader>ee", ":Neotree filesystem toggle right<CR>", desc = "Toggle filessytem" },
-	},
+	init = function()
+		vim.keymap.set(
+			"n",
+			"<leader>ee",
+			":Neotree filesystem toggle right<CR>",
+			{ desc = "Toggle filessytem", silent = true }
+		)
+	end,
 }
