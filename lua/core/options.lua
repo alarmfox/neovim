@@ -12,7 +12,6 @@ opt.relativenumber = true
 opt.number = true
 opt.wrap = true
 
-
 -- search settings
 opt.ignorecase = true
 opt.smartcase = true

@@ -8,6 +8,6 @@ return {
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	keys = {
-		{ "<leader>b", ":Neotree filesystem toggle right<CR>", desc = "Filesystem" },
+		{ "<leader>ee", ":Neotree filesystem toggle right<CR>", desc = "Toggle filessytem" },
 	},
 }
