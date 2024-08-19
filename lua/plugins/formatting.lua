@@ -34,6 +34,8 @@ return {
 				json = { "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
+				c = { "clangd" },
+				cpp = { "clangd" },
 			},
 		})
 	end,
