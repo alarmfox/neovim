@@ -2,15 +2,13 @@ return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	dependencies = {
 		{
-			{
-				"jay-babu/mason-nvim-dap.nvim",
-				dependencies = {
-					"mfussenegger/nvim-dap",
-				},
+			"jay-babu/mason-nvim-dap.nvim",
+			dependencies = {
+				"mfussenegger/nvim-dap",
 			},
-			"williamboman/mason-lspconfig.nvim",
-			"williamboman/mason.nvim",
 		},
+		"williamboman/mason-lspconfig.nvim",
+		"williamboman/mason.nvim",
 	},
 	lazy = false,
 	config = function()
