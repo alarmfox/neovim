@@ -5,7 +5,8 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
-		{ "p00f/clangd_extensions.nvim" },
+		"p00f/clangd_extensions.nvim",
+		"williamboman/mason-lspconfig.nvim",
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
@@ -73,7 +74,6 @@ return {
 			["clangd"] = function()
 				lspconfig["clangd"].setup({
 					capabilities = capabilities,
-					filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 					on_attach = function(client, bufnr)
 						require("clangd_extensions.inlay_hints").setup_autocmd()
 						require("clangd_extensions.inlay_hints").set_inlay_hints()
@@ -88,7 +88,6 @@ return {
 						"clangd",
 						"--background-index",
 						"--clang-tidy",
-						"--header-insertion=iwyu",
 						"--completion-style=detailed",
 						"--function-arg-placeholders",
 						"--fallback-style=llvm",

@@ -1,35 +1,49 @@
 return {
-	"williamboman/mason.nvim",
+	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		{
+			{
+				"jay-babu/mason-nvim-dap.nvim",
+				dependencies = {
+					"mfussenegger/nvim-dap",
+				},
+			},
+			"williamboman/mason-lspconfig.nvim",
+			"williamboman/mason.nvim",
+		},
 	},
 	lazy = false,
 	config = function()
 		local mason = require("mason")
-		local mason_lspconfig = require("mason-lspconfig")
 		local mason_tool_installer = require("mason-tool-installer")
 
 		mason.setup({})
-		mason_lspconfig.setup({
+
+		mason_tool_installer.setup({
 			ensure_installed = {
+				-- lsp
 				"lua_ls",
 				"clangd",
 				"gopls",
 				"rust_analyzer",
 				"html",
 				"pyright",
-			},
-		})
 
-		mason_tool_installer.setup({
-			ensure_installed = {
+				-- formatting
 				"prettier",
 				"stylua",
 				"isort",
 				"black",
 				"eslint_d",
 				"pylint",
+
+				-- debug
+				"delve",
+				"codelldb",
+				"python",
+			},
+			integrations = {
+				["mason-null-ls"] = false,
 			},
 		})
 	end,
