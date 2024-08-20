@@ -20,6 +20,8 @@ return {
 		local lspkind = require("lspkind")
 		require("luasnip.loaders.from_vscode").lazy_load()
 
+		lspkind.init()
+
 		cmp.setup({
 			snippet = {
 				-- REQUIRED - you must specify a snippet engine
@@ -50,6 +52,14 @@ return {
 					maxwidth = 50,
 					ellipsis_char = "...",
 				}),
+			},
+		})
+
+		-- Setup up vim-dadbod
+		cmp.setup.filetype({ "sql" }, {
+			sources = {
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
 			},
 		})
 	end,
