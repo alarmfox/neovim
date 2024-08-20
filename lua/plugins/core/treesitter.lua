@@ -33,6 +33,9 @@ return {
 				"json",
 				"yaml",
 				"make",
+				"go",
+				"cmake",
+				"rust",
 			},
 		})
 	end,

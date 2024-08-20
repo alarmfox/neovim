@@ -40,6 +40,25 @@ return {
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					elseif luasnip.locally_jumpable(1) then
+						luasnip.jump(1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					elseif luasnip.locally_jumpable(-1) then
+						luasnip.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
@@ -53,15 +72,13 @@ return {
 				format = lspkind.cmp_format({
 					maxwidth = 50,
 					ellipsis_char = "...",
+					menu = { -- showing type in menu
+						nvim_lsp = "[LSP]",
+						path = "[Path]",
+						buffer = "[Buffer]",
+						luasnip = "[LuaSnip]",
+					},
 				}),
-			},
-		})
-
-		-- Setup up vim-dadbod
-		cmp.setup.filetype({ "sql" }, {
-			sources = {
-				{ name = "vim-dadbod-completion" },
-				{ name = "buffer" },
 			},
 		})
 	end,

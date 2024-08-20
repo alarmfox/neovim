@@ -74,9 +74,12 @@ return {
 						capabilities = capabilities,
 					})
 				end,
-				lua_ls = function()
+				["lua_ls"] = function()
 					lspconfig["lua_ls"].setup({
 						capabilities = capabilities,
+						server_capabilities = {
+							semanticTokensProvider = nil,
+						},
 						settings = {
 							Lua = {
 								diagnostic = {
@@ -103,7 +106,7 @@ return {
 					})
 				end,
 
-				rust_analyzer = function()
+				["rust_analyzer"] = function()
 					lspconfig["rust_analyzer"].setup({
 						capabilities = capabilities,
 						on_attach = function(client, bufnr)
@@ -112,7 +115,7 @@ return {
 					})
 				end,
 
-				gopls = function()
+				["gopls"] = function()
 					lspconfig["gopls"].setup({
 						capabilities = capabilities,
 						settings = {
@@ -123,7 +126,7 @@ return {
 					})
 				end,
 
-				clangd = function()
+				["clangd"] = function()
 					lspconfig["clangd"].setup({
 						capabilities = capabilities,
 						on_attach = function(client, bufnr)
