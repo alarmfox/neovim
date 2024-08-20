@@ -4,9 +4,12 @@ return {
 	build = ":TSUpdate",
 	dependencies = {
 		"windwp/nvim-ts-autotag",
+		"nvim-treesitter/nvim-treesitter-context",
 	},
 	config = function()
+		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup({
+			auto_install = true,
 			sync_install = false,
 			highlight = { enable = true },
 			indent = { enable = true },
