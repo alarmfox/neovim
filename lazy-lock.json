@@ -13,6 +13,7 @@
   "friendly-snippets": { "branch": "main", "commit": "00ebcaa159e817150bd83bfe2d51fa3b3377d5c4" },
   "gopher.nvim": { "branch": "main", "commit": "f55c15ada8e02398000c04a96ef44d986cd01051" },
   "indent-blankline.nvim": { "branch": "master", "commit": "db926997af951da38e5004ec7b9fbdc480b48f5d" },
+  "kulala.nvim": { "branch": "main", "commit": "38cac91b52fd571054c13803d601680cb4ee9080" },
   "lazy.nvim": { "branch": "main", "commit": "077102c5bfc578693f12377846d427f49bc50076" },
   "lspkind.nvim": { "branch": "master", "commit": "cff4ae321a91ee3473a92ea1a8c637e3a9510aec" },
   "lualine.nvim": { "branch": "master", "commit": "b431d228b7bbcdaea818bdc3e25b8cdbe861f056" },
