@@ -19,6 +19,11 @@ return {
 			defaults = {
 				path_display = { "smart" },
 			},
+			pickers = {
+				colorscheme = {
+					enable_preview = true,
+				},
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown({
@@ -30,9 +35,11 @@ return {
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fuzzy find string in cwd" })
+		vim.keymap.set("n", "/", builtin.live_grep, { desc = "Fuzzy find string in cwd" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Fuzzy find open buffers" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Fuzzy find help tags" })
 		vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Fuzzy find recent files" })
+		vim.keymap.set("n", "<leader>fc", builtin.colorscheme, { desc = "Colorscheme picker" })
 		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find todos" })
 
 		telescope.load_extension("ui-select")
