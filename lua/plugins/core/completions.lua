@@ -15,11 +15,16 @@ return {
 		"rafamadriz/friendly-snippets", -- useful snippets
 		"onsails/lspkind.nvim", -- vs-code like pictograms
 		"hrsh7th/cmp-nvim-lsp-signature-help",
+		"zbirenbaum/copilot-cmp",
 	},
 	config = function()
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
 		local luasnip = require("luasnip")
+		require("copilot_cmp").setup({
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+		})
 
 		require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -64,8 +69,8 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-				{ name = "nvim_lsp_signature_help" },
 				{ name = "luasnip" }, -- For luasnip users.
+				{ name = "copilot" },
 				{ name = "buffer" },
 				{ name = "path" },
 			}),
@@ -79,6 +84,7 @@ return {
 						path = "[Path]",
 						buffer = "[Buffer]",
 						luasnip = "[LuaSnip]",
+						copilot = "[Copilot]",
 					},
 				}),
 			},
