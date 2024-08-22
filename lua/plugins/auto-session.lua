@@ -10,8 +10,8 @@ return {
 		auto_save_enabled = true,
 	},
 	keys = {
-		{ "<leader>ws", "<cmd>SessionSave<CR>", { desc = "Save session based on the cwd", silent = true } },
-		{ "<leader>wr", "<cmd>SessionRestore<CR>", { desc = "Restore session based on cwd", silent = true } },
-		{ "<leader>wR", "<cmd>SessionSearch<CR>", { desc = "Search session", silent = true } },
+		{ "<leader>ws", "<cmd>SessionSave<CR>", { desc = "[W]orkspace [s]ave based on the cwd", silent = true } },
+		{ "<leader>wr", "<cmd>SessionRestore<CR>", { desc = "[W]orkspace [r]estore based on cwd", silent = true } },
+		{ "<leader>wR", "<cmd>SessionSearch<CR>", { desc = "[W]orkspace [R]estore", silent = true } },
 	},
 }
