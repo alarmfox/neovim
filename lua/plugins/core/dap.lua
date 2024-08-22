@@ -6,6 +6,7 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
 			"williamboman/mason.nvim",
+			"mfussenegger/nvim-dap-python",
 		},
 		config = function()
 			local dap = require("dap")
@@ -17,9 +18,15 @@ return {
 			require("dapui").setup()
 			require("dap-go").setup()
 
+			-- python
+
+			local debugpy = mason_registry.get_package("debugpy")
+			local debugpy_path = debugpy:get_install_path() .. "/venv/bin/python" -- returns a string like "/home/user/.local/share/nvim/mason/packages/codelldb"
+
+			require("dap-python").setup(debugpy_path)
+
 			-- c, cpp, rust
 			local codelldb = mason_registry.get_package("codelldb") -- note that this will error if you provide a non-existent package name
-			codelldb:get_install_path() -- returns a string like "/home/user/.local/share/nvim/mason/packages/codelldb"
 
 			local extension_path = codelldb:get_install_path() .. "/extension/"
 			local codelldb_path = extension_path .. "adapter/codelldb"

@@ -11,6 +11,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"stevearc/conform.nvim",
 		"mfussenegger/nvim-lint",
+		"jay-babu/mason-nvim-dap.nvim",
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
@@ -53,6 +54,7 @@ return {
 				"rust_analyzer",
 				"html",
 				"pyright",
+				"bash-language-server",
 
 				-- formatting
 				"prettier",
@@ -61,6 +63,10 @@ return {
 				"black",
 				"eslint_d",
 				"pylint",
+
+				-- debugging
+				"codelldb",
+				"python",
 			},
 			integrations = {
 				["mason-null-ls"] = false,
