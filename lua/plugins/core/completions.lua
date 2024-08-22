@@ -14,17 +14,24 @@ return {
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
 		"onsails/lspkind.nvim", -- vs-code like pictograms
+		{
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = {
+				library = {
+					-- See the configuration section for more details
+					-- Load luvit types when the `vim.uv` word is found
+					{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				},
+			},
+		},
+		{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 		"hrsh7th/cmp-nvim-lsp-signature-help",
-		"zbirenbaum/copilot-cmp",
 	},
 	config = function()
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
 		local luasnip = require("luasnip")
-		require("copilot_cmp").setup({
-			suggestion = { enabled = false },
-			panel = { enabled = false },
-		})
 
 		require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -68,9 +75,9 @@ return {
 				end, { "i", "s" }),
 			}),
 			sources = cmp.config.sources({
+				{ name = "lazydev", group_index = 0 },
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" }, -- For luasnip users.
-				{ name = "copilot" },
 				{ name = "buffer" },
 				{ name = "path" },
 			}),
@@ -84,7 +91,6 @@ return {
 						path = "[Path]",
 						buffer = "[Buffer]",
 						luasnip = "[LuaSnip]",
-						copilot = "[Copilot]",
 					},
 				}),
 			},

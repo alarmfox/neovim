@@ -50,6 +50,8 @@ return {
 				"go",
 				"cmake",
 				"rust",
+				"diff",
+				"sql",
 			},
 		})
 	end,
