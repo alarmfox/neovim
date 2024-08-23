@@ -13,31 +13,10 @@ return {
 			require("copilot").setup({})
 			require("CopilotChat").setup()
 
-			vim.keymap.set("n", "<leader>ai", "<cmd>CopilotChat<CR>", { desc = "Open Copilot chat" })
-			vim.keymap.set(
-				{ "n", "v" },
-				"<leader>aid",
-				"<cmd>CopilotChatDocs<CR>",
-				{ desc = "Copilot document the selected code" }
-			)
-			vim.keymap.set(
-				{ "n", "v" },
-				"<leader>aie",
-				"<cmd>CopilotChatExplain<CR>",
-				{ desc = "Copilot explain the selected code" }
-			)
-			vim.keymap.set(
-				{ "n", "v" },
-				"<leader>aif",
-				"<cmd>CopilotChatFix<CR>",
-				{ desc = "Copilot fix selected code" }
-			)
-			vim.keymap.set(
-				{ "n", "v" },
-				"<leader>aif",
-				"<cmd>CopilotChatFix<CR>",
-				{ desc = "Copilot fix selected code" }
-			)
+			vim.keymap.set("n", "<leader>aic", "<cmd>CopilotChat<CR>", { desc = "[AI] [c]hat" })
+			vim.keymap.set({ "n", "v" }, "<leader>aid", "<cmd>CopilotChatDocs<CR>", { desc = "[AI] [d]ocument" })
+			vim.keymap.set({ "n", "v" }, "<leader>aie", "<cmd>CopilotChatExplain<CR>", { desc = "[AI] [e]xplain" })
+			vim.keymap.set({ "n", "v" }, "<leader>aif", "<cmd>CopilotChatFix<CR>", { desc = "[AI] [f]ix" })
 		end,
 	},
 }

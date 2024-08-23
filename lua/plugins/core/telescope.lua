@@ -33,14 +33,13 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fuzzy find string in cwd" })
-		vim.keymap.set("n", "/", builtin.live_grep, { desc = "Fuzzy find string in cwd" })
-		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Fuzzy find open buffers" })
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Fuzzy find help tags" })
-		vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Fuzzy find recent files" })
-		vim.keymap.set("n", "<leader>fc", builtin.colorscheme, { desc = "Colorscheme picker" })
-		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find todos" })
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [f]iles" })
+		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind with grep" })
+		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [b]uffers" })
+		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [h]elp tags" })
+		vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "[F]ind [r]ecent files" })
+		vim.keymap.set("n", "<leader>fc", builtin.colorscheme, { desc = "[F]ind [c]olors" })
+		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "[F]ind [t]odos" })
 
 		telescope.load_extension("ui-select")
 		telescope.load_extension("fzf")
