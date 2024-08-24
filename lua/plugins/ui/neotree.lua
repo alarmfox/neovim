@@ -5,7 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
-		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+		"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	cmd = "Neotree",
 	init = function()
@@ -32,6 +32,6 @@ return {
 		},
 	},
 	keys = {
-		{ "<leader>ee", "<cmd>Neotree toggle right<CR>", { desc = "Neotree toggle", silent = true } },
+		{ "<leader>fe", "<cmd>Neotree toggle right<CR>", desc = "[F]ile [e]xplorer" },
 	},
 }
