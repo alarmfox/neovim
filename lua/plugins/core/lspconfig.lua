@@ -123,12 +123,10 @@ return {
 				"html",
 				"pyright",
 				"bash-language-server",
-				"sql",
 
 				-- formatting
 				"prettier",
 				"stylua",
-				"gofmt",
 				"goimports",
 				"isort",
 				"black",

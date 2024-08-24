@@ -52,6 +52,7 @@ return {
 				"rust",
 				"diff",
 				"sql",
+				"toml",
 			},
 		})
 	end,
