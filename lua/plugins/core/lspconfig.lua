@@ -4,7 +4,6 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		"p00f/clangd_extensions.nvim",
 		"williamboman/mason.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"williamboman/mason-lspconfig.nvim",
@@ -181,8 +180,6 @@ return {
 					lspconfig["clangd"].setup({
 						capabilities = capabilities,
 						on_attach = function(client, bufnr)
-							require("clangd_extensions.inlay_hints").setup_autocmd()
-							require("clangd_extensions.inlay_hints").set_inlay_hints()
 							vim.keymap.set(
 								"n",
 								"<leader>ch",
