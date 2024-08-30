@@ -123,14 +123,16 @@ return {
 				"pyright",
 				"bash-language-server",
 
-				-- formatting
-				"prettier",
+				-- formatting and linting
+				"prettierd",
+				"clang-format",
 				"stylua",
 				"goimports",
 				"isort",
 				"black",
 				"eslint_d",
 				"pylint",
+				"yamlfix",
 
 				-- debugging
 				"codelldb",
@@ -189,11 +191,14 @@ return {
 						end,
 						cmd = {
 							"clangd",
+							"-j=4",
 							"--background-index",
 							"--clang-tidy",
 							"--completion-style=detailed",
 							"--function-arg-placeholders",
 							"--fallback-style=llvm",
+							"--header-insertion=never",
+							"--pch-storage=memory",
 						},
 						init_options = {
 							usePlaceholders = true,
@@ -225,20 +230,26 @@ return {
 
 		conform.setup({
 			format_on_save = conform_opts,
+			formatters = {
+				yamlfix = {
+					env = {
+						YAMLFIX_SEQUENCE_STYLE = "block_style",
+					},
+				},
+			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				go = { "goimports", "gofmt" },
 				python = { "isort", "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				css = { "prettier" },
-				html = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
-				c = { "clangd" },
-				cpp = { "clangd" },
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
+				css = { "prettierd" },
+				json = { "prettierd" },
+				jsonc = { "prettierd" },
+				yaml = { "yamlfix" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
 			},
 		})
 
