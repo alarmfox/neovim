@@ -3,7 +3,10 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
 	dependencies = {
-		"windwp/nvim-ts-autotag",
+		{
+			"windwp/nvim-ts-autotag",
+			config = true,
+		},
 		{
 			"nvim-treesitter/nvim-treesitter-context",
 			opts = {
@@ -15,8 +18,8 @@ return {
 	config = function()
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup({
-			auto_install = true,
-			sync_install = false,
+			auto_install = false,
+			sync_install = true,
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = false,
@@ -36,6 +39,7 @@ return {
 				"c",
 				"lua",
 				"javascript",
+				"typescript",
 				"html",
 				"markdown",
 				"markdown_inline",
@@ -48,6 +52,7 @@ return {
 				"diff",
 				"sql",
 				"toml",
+				"http",
 			},
 		})
 	end,
