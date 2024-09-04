@@ -12,12 +12,6 @@ return {
 		"jay-babu/mason-nvim-dap.nvim",
 	},
 	config = function()
-		local lspconfig = require("lspconfig")
-		local mason = require("mason")
-		local mason_lspconfig = require("mason-lspconfig")
-		local mason_tool_installer = require("mason-tool-installer")
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 		local conform = require("conform")
 		local lint = require("lint")
 
@@ -110,6 +104,9 @@ return {
 				end
 			end,
 		})
+
+		local mason = require("mason")
+		local mason_tool_installer = require("mason-tool-installer")
 		mason.setup({})
 
 		mason_tool_installer.setup({
@@ -122,6 +119,7 @@ return {
 				"html",
 				"pyright",
 				"bash-language-server",
+				"typescript-language-server",
 
 				-- formatting and linting
 				"prettierd",
@@ -144,6 +142,12 @@ return {
 			},
 		})
 
+		local mason_lspconfig = require("mason-lspconfig")
+
+		local lspconfig = require("lspconfig")
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
 		mason_lspconfig.setup({
 			handlers = {
 				function(server_name)
@@ -154,7 +158,26 @@ return {
 				["lua_ls"] = function()
 					lspconfig["lua_ls"].setup({
 						capabilities = capabilities,
-						telemetry = { enable = false },
+						settings = {
+							Lua = {
+								runtime = {
+									-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+									version = "LuaJIT",
+								},
+								diagnostics = {
+									-- Get the language server to recognize the `vim` global
+									globals = { "vim" },
+								},
+								-- workspace = {
+								-- 	-- Make the server aware of Neovim runtime files
+								-- 	library = vim.api.nvim_get_runtime_file("lua", true),
+								-- },
+								-- Do not send telemetry data containing a randomized but unique identifier
+								telemetry = {
+									enable = false,
+								},
+							},
+						},
 					})
 				end,
 
@@ -255,11 +278,6 @@ return {
 
 		-- linting
 		lint.linters_by_ft = {
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
-			svelte = { "eslint_d" },
 			python = { "pylint" },
 		}
 
