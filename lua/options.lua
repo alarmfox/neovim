@@ -2,6 +2,12 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.scrolloff = 10
+
+-- cmd
+vim.opt.showcmd = true
+vim.opt.cmdheight = 0
+
 -- tabs and indentation
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
