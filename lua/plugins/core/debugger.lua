@@ -7,8 +7,12 @@ return {
 			"nvim-neotest/nvim-nio",
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap-python",
+			"jay-babu/mason-nvim-dap.nvim",
 		},
 		config = function()
+			require("mason-nvim-dap").setup({
+				ensure_installed = { "python", "delve", "codelldb" },
+			})
 			local dap = require("dap")
 			local ui = require("dapui")
 

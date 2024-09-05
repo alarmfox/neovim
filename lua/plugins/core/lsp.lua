@@ -5,16 +5,9 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		"williamboman/mason.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"williamboman/mason-lspconfig.nvim",
-		"stevearc/conform.nvim",
-		"mfussenegger/nvim-lint",
-		"jay-babu/mason-nvim-dap.nvim",
 	},
 	config = function()
-		local conform = require("conform")
-		local lint = require("lint")
-
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
 			callback = function(event)
@@ -105,11 +98,11 @@ return {
 			end,
 		})
 
-		local mason = require("mason")
-		local mason_tool_installer = require("mason-tool-installer")
-		mason.setup({})
+		require("mason").setup({})
 
-		mason_tool_installer.setup({
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+		require("mason-lspconfig").setup({
 			ensure_installed = {
 				-- lsp
 				"lua_ls",
@@ -119,44 +112,17 @@ return {
 				"html",
 				"pyright",
 				"bash-language-server",
-				"typescript-language-server",
-
-				-- formatting and linting
-				"prettierd",
-				"clang-format",
-				"stylua",
-				"goimports",
-				"isort",
-				"black",
-				"eslint_d",
-				"pylint",
-				"yamlfix",
-
-				-- debugging
-				"codelldb",
-				"python",
-				"delve",
+				"ts_ls",
 			},
-			integrations = {
-				["mason-null-ls"] = false,
-			},
-		})
 
-		local mason_lspconfig = require("mason-lspconfig")
-
-		local lspconfig = require("lspconfig")
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-		mason_lspconfig.setup({
 			handlers = {
 				function(server_name)
-					lspconfig[server_name].setup({
+					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
 					})
 				end,
 				["lua_ls"] = function()
-					lspconfig["lua_ls"].setup({
+					require("lspconfig")["lua_ls"].setup({
 						capabilities = capabilities,
 						settings = {
 							Lua = {
@@ -182,7 +148,7 @@ return {
 				end,
 
 				["rust_analyzer"] = function()
-					lspconfig["rust_analyzer"].setup({
+					require("lspconfig")["rust_analyzer"].setup({
 						capabilities = capabilities,
 						on_attach = function(client, bufnr)
 							vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -191,7 +157,7 @@ return {
 				end,
 
 				["gopls"] = function()
-					lspconfig["gopls"].setup({
+					require("lspconfig")["gopls"].setup({
 						capabilities = capabilities,
 						settings = {
 							gopls = {
@@ -202,7 +168,7 @@ return {
 				end,
 
 				["clangd"] = function()
-					lspconfig["clangd"].setup({
+					require("lspconfig")["clangd"].setup({
 						capabilities = capabilities,
 						on_attach = function(client, bufnr)
 							vim.keymap.set(
@@ -232,66 +198,5 @@ return {
 				end,
 			},
 		})
-
-		-- formatting
-		local conform_opts = {
-			lsp_fallback = true,
-			timeout_ms = 1000,
-			async = false,
-		}
-
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*",
-			callback = function(args)
-				conform.format({ bufnr = args.buf })
-			end,
-		})
-
-		vim.keymap.set({ "n", "v" }, "<leader>f", function()
-			conform.format(conform_opts)
-		end, { desc = "Format file or range (in visual mode)" })
-
-		conform.setup({
-			format_on_save = conform_opts,
-			formatters = {
-				yamlfix = {
-					env = {
-						YAMLFIX_SEQUENCE_STYLE = "block_style",
-					},
-				},
-			},
-			formatters_by_ft = {
-				lua = { "stylua" },
-				go = { "goimports", "gofmt" },
-				python = { "isort", "black" },
-				rust = { "rustfmt", lsp_format = "fallback" },
-				javascript = { "prettierd" },
-				typescript = { "prettierd" },
-				css = { "prettierd" },
-				json = { "prettierd" },
-				jsonc = { "prettierd" },
-				yaml = { "yamlfix" },
-				c = { "clang-format" },
-				cpp = { "clang-format" },
-			},
-		})
-
-		-- linting
-		lint.linters_by_ft = {
-			python = { "pylint" },
-		}
-
-		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-			group = lint_augroup,
-			callback = function()
-				lint.try_lint()
-			end,
-		})
-
-		vim.keymap.set("n", "<leader>l", function()
-			lint.try_lint()
-		end, { desc = "Trigger linting for current file" })
 	end,
 }
