@@ -111,7 +111,7 @@ return {
 				"rust_analyzer",
 				"html",
 				"pyright",
-				"bash-language-server",
+				"bashls",
 				"ts_ls",
 			},
 

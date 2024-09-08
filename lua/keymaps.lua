@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>nh", "<cmd> nohl<CR>", { noremap = true, silent = t
 -- window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { noremap = true, silent = true, desc = "[S]plit [v]ertically" })
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { noremap = true, silent = true, desc = "[S]plit [h]orizontally" })
-vim.keymap.set("n", "<leader>sx", "<cmd>close<cr>", { noremap = true, silent = true, desc = "[E]xit current [s]plit" })
+vim.keymap.set("n", "<leader>sx", "<cmd>close<cr>", { noremap = true, silent = true, desc = "E[x]it current [s]plit" })
 
 -- navigate in insert mode
 vim.keymap.set("i", "<C-h>", "<Left>", { noremap = true, silent = true, desc = "Move left" })
@@ -44,3 +44,43 @@ vim.keymap.set(
 	'"_dP',
 	{ noremap = true, silent = true, desc = "Paste over selection without erasing unnamed register" }
 )
+
+-- kulala commands
+vim.api.nvim_create_autocmd("Filetype", {
+	pattern = { "http" },
+	desc = "Kulala keybindings",
+	callback = function()
+		vim.keymap.set(
+			"n",
+			"<leader>rc",
+			require("kulala").run,
+			{ desc = "[R]un [c]urrent request", noremap = true, silent = true }
+		)
+
+		vim.keymap.set(
+			"n",
+			"<C-k>",
+			require("kulala").jump_prev,
+			{ desc = "Jump prev request", noremap = true, silent = true }
+		)
+		vim.keymap.set(
+			"n",
+			"<C-j>",
+			require("kulala").jump_next,
+			{ desc = "Jump next request", noremap = true, silent = true }
+		)
+	end,
+})
+
+vim.keymap.set("n", "<leader>rs", function()
+	require("kulala").scratchpad()
+end, { desc = "[R]equest [s]cratchpad", noremap = true, silent = true })
+
+-- highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})

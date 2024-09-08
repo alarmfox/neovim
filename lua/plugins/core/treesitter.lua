@@ -53,6 +53,7 @@ return {
 				"sql",
 				"toml",
 				"http",
+				"latex",
 			},
 		})
 	end,
