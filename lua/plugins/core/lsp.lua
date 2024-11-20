@@ -113,6 +113,7 @@ return {
 				"pyright",
 				"bashls",
 				"ts_ls",
+				"texlab",
 			},
 
 			handlers = {
