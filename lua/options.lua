@@ -36,3 +36,9 @@ vim.opt.signcolumn = "yes"
 
 -- backspace
 vim.opt.backspace = "indent,eol,start" --allow backspace on indent, end of line and insert mode start
+
+-- sync buffer automatically
+vim.opt.autoread = true
+
+-- disable neovim generating a swapfile
+vim.opt.swapfile = false
