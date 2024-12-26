@@ -21,6 +21,13 @@ return {
 	config = function()
 		require("mason").setup({})
 
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(_)
+				vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { desc = "Jump to declaration" })
+				vim.keymap.set("n", "gD", vim.lsp.buf.definition, { desc = "Jump to definition" })
+			end,
+		})
+
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		require("mason-lspconfig").setup({
 			automatic_installation = false,
