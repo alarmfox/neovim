@@ -13,7 +13,6 @@ The main features of this configuration include:
 - **Treesitter**: Syntax highlighting and code parsing.
 - **Telescope**: Fuzzy finder and file picker.
 - **LSP (Language Server Protocol)**: Minimal configuration for language servers.
-- **Conform**: Code formatting and linting.
 
 Additionally, this configuration supports debugging for the following languages:
 - Go
