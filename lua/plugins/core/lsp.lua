@@ -27,8 +27,8 @@ return {
 
         if not client then return end
 
-        vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { desc = "Jump to declaration" })
-        vim.keymap.set("n", "gD", vim.lsp.buf.definition, { desc = "Jump to definition" })
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Jump to declaration" })
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Jump to definition" })
 
         if client.supports_method('textDocument/formatting', args.buf) then
           -- Format the current buffer on save
@@ -103,10 +103,7 @@ return {
               "--background-index",
               "--clang-tidy",
               "--completion-style=detailed",
-              "--function-arg-placeholders",
-              "--fallback-style=llvm",
               "--header-insertion=never",
-              "--pch-storage=memory",
             },
             init_options = {
               completeUnimported = true,
