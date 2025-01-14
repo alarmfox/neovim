@@ -82,12 +82,6 @@ require("lazy").setup({
       "mistweaverco/kulala.nvim",
       opts = {},
     },
-    {
-      "sindrets/diffview.nvim"
-    },
-    {
-      dir = "~/dev/personal/record.nvim"
-    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
