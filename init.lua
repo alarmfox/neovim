@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
-vim.keymap.set("n", "<space>t", function()
+vim.keymap.set("n", "<space>st", function()
   vim.cmd.new()
   vim.cmd.term()
   vim.cmd.wincmd("J")
