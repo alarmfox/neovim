@@ -30,6 +30,10 @@ return {
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Jump to declaration" })
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Jump to definition" })
 
+        vim.keymap.set("n", "<leader>v", function()
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf }), { bufnr = args.buf })
+        end, { desc = "Toggle inlay hints" })
+
         if client.supports_method('textDocument/formatting', args.buf) then
           -- Format the current buffer on save
           vim.api.nvim_create_autocmd('BufWritePre', {
@@ -39,10 +43,11 @@ return {
             end,
           })
         end
+        if client.supports_method('textDocument/inlayHint', args.buf) then
+          vim.lsp.inlay_hint.enable(true, { bufnr = args.buf, id = client.id })
+        end
       end,
     })
-
-
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
     require("mason-lspconfig").setup({
@@ -74,15 +79,6 @@ return {
                 },
               },
             },
-          })
-        end,
-
-        ["rust_analyzer"] = function(name)
-          require("lspconfig")[name].setup({
-            capabilities = capabilities,
-            on_attach = function(_, bufnr)
-              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-            end,
           })
         end,
 
